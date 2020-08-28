@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class CityModel(models.Model):
     name = models.TextField(null=False)
     countrycode = models.CharField(max_length=3, null=False)
@@ -17,16 +16,16 @@ class CountryModel(models.Model):
     name = models.CharField(max_length=100, null=False)
     continent = models.CharField(max_length=100, null=False)
     region = models.CharField(max_length=100, null=False)
-    surfacearea = models.FloatField()
-    indepyear = models.IntegerField()
+    surfacearea = models.FloatField(null=False)
+    indepyear = models.IntegerField(null=True)
     population = models.IntegerField(null=False)
-    lifeexpectancy = models.FloatField()
-    gnp = models.FloatField(max_length=10)
-    gnpold = models.FloatField(max_length=10)
+    lifeexpectancy = models.FloatField(null=True)
+    gnp = models.FloatField(max_length=10, null=True)
+    gnpold = models.FloatField(max_length=10, null=True)
     localname = models.CharField(max_length=100, null=False)
     governmentform = models.CharField(max_length=100, null=False)
-    headofstate = models.CharField(max_length=100)
-    capital = models.IntegerField()
+    headofstate = models.CharField(max_length=100, null=True)
+    capital = models.IntegerField(null=True)
     code2 = models.CharField(max_length=2, null=False)
 
     class Meta:
