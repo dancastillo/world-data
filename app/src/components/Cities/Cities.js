@@ -1,31 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import {QUERY_CITIES} from "../../helpers/query";
 
-const QUERY_CITIES = gql`
-  query {
-    cities {
-      id
-      name
-      district
-      countrycode
-      population
-    }
-  }
-`;
 
 export function Cities() {
-  const { data, loading } = useQuery(
-    QUERY_CITIES, {
-      pollInterval: 500
-    }
-  );
+  const { data, loading } = useQuery(QUERY_CITIES);
 
   if (loading) {
     return (<p>Loading....</p>)
   }
 
-  return data.cities.map(({ id, name, district, countrycode, population }) => (
+  return data.cities.map(({ id, name }) => (
     <div key={id}>
       <p>
         City - {id}: {name}
