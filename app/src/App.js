@@ -67,7 +67,10 @@ const App = () => {
                   </Route>
                   <Route exact path="/">
                     <Continent />
-                    <Regions />
+                    {state.continent !== null
+                      ? <Regions />
+                      : <></>
+                    }
                   </Route>
                 </Switch>
               </main>

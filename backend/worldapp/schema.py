@@ -1,6 +1,5 @@
-from graphene_django import DjangoObjectType
 import graphene
-
+from graphene_django import DjangoObjectType
 from .models import CityModel, CountryModel, CountrylanguageModel
 
 
@@ -13,16 +12,29 @@ class Country(DjangoObjectType):
     class Meta:
         model = CountryModel
 
+    def continent(self, info):
+        return self.objects
+
 
 class Countrylanguage(DjangoObjectType):
     class Meta:
         model = CountrylanguageModel
 
 
+class Continents(graphene.ObjectType):
+    continent = graphene.String()
+
+
+class Regions(graphene.ObjectType):
+    region = graphene.String()
+    
+
 class Query(graphene.ObjectType):
     cities = graphene.List(City)
     countries = graphene.List(Country)
     country_languages = graphene.List(Countrylanguage)
+    continents = graphene.List(Continents)
+    regions = graphene.List(Regions, continent=graphene.String(required=True))
 
     def resolve_cities(self, info):
         return CityModel.objects.all()
@@ -32,6 +44,16 @@ class Query(graphene.ObjectType):
 
     def resolve_country_languages(self, info):
         return CountrylanguageModel.objects.all()
+
+    def resolve_continents(self, info):
+        return CountryModel.objects.values('continent').distinct()
+
+    def resolve_regions(self, info, continent=None):
+        print(continent)
+        if continent is not None:
+            return CountryModel.objects.filter(continent=continent).values('region').distinct()
+
+        return None;
 
 
 class CreateCity(graphene.Mutation):
