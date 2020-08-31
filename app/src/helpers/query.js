@@ -53,3 +53,10 @@ export const QUERY_CONTINENTS = gql`
   }
 `;
 
+export const QUERY_REGIONS = gql`
+  query regions($continent: String!) {
+    regions(continent: $continent) {
+        region
+    }
+  }
+`;

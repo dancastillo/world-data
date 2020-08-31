@@ -65,6 +65,8 @@ GRAPHENE = {
     'SCHEMA': 'worldapp.schema.schema'
 }
 
+APPEND_SLASH = False
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
