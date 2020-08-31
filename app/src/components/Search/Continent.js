@@ -12,7 +12,8 @@ const SearchContinent = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const continentVal = (searchContinent.current.value).trim().toLowerCase();
+    setContinent(null);
+    const continentVal = (searchContinent.current.value).trim();
 
     if (continentVal === defaultSelectValue) {
       return;
@@ -36,7 +37,7 @@ const SearchContinent = () => {
                 >
                   <option disabled value={defaultSelectValue}>Select a Continent</option>
                   {data.continents.map(({ continent }) => (
-                    <option value={continent.toLowerCase()} key={continent.toLowerCase()}>
+                    <option value={continent} key={continent.toLowerCase()}>
                       {continent}
                     </option>
                   ))};
